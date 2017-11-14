@@ -1,0 +1,50 @@
+line      address   type      name      category  array size
+4         2         integer   y         array     5         
+3         0         integer   x         simple    0         
+Assign    t2   5         't2 contains 5
+Assign    t3   3         't3 contains 3
+Add       t1   t2   t3   't1 contains 3 + 5
+Load      0    t3        't3 contains content of memory location 0 (address
+                         'of x) thus, t3 contains value of x
+Assign    t4   7         't4 contains 7
+Add       t2   t3   t4   't2 contains x + 7
+Mul       t0   t1   t2   't0 contains (3 + 5) * (x + 7)
+Store     0    t0        'store content of t0 into memory location 0 (address
+                         'of x)
+Load      0   t0         't0 contains content of x
+Assign    t2   3         't2 contains array index
+Assign    t1   2         't1 contains address of y
+Mul       t2   t2   2    't2 contains offset
+Add       t1   t1   t2   't1 contains address of y[3]
+Store     t1   t0        'store value of t0(x) into address t1 (y[3])
+Assign    t0   5    
+Store     0    t0        'store value of t0 into memory location 0 (x)
+Assign    t0   5    
+Store     0    t0   
+L0:                      'label used to repeat the while loop
+Load      0    t1        't1 contains value of x
+Assign    t2   5         't2 contains 5
+SetE      t0   t1   t2   'compare t1 and t2, and set t0 accordingly
+JumpZ     t0   L1        'if t0 is zero, exit while loop
+Assign    t3   0         't3 contains array index
+Assign    t2   2         't2 contains address of y
+Mul       t3   t3   2    't3 contains offset
+Add       t2   t2   t3   't2 contains address of y[0]
+Load      t2   t1        't1 contains content of y[0]
+Assign    t2   6         't2 contains 6
+SetE      t0   t1   t2   'compare t1(y[0]) and t2(6), and set t0 accordingly
+JumpZ     t0   L2        'jump to the else part, if the expression is false
+Assign    t1   7         't1 = 7
+Load      0    t2        't2 = x (because memory_address(x) = 0)
+Add       t0   t1   t2   't0 = 7 + x
+Store     0    t0        'store it into x
+Jump      L3             'skip the else part of the if-statement
+L2:                      'label used to skip if part and jump to else part
+Assign    t1   7         't1 = 7
+Load      0    t2        't2 = value of x
+Sub       t0   t1   t2   't0 = t1 - t2 = 7 - x
+Store     0    t0        'x = t0
+L3:                      'label used to skip the else part
+Jump      L0             'go to the start of the while loop
+L1:                      'label used to exit the while loop
+

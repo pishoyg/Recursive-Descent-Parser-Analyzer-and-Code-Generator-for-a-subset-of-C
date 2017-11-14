@@ -1,0 +1,446 @@
+%you need to change the paths of the files if you want to recompile
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[space]{grffile}
+\usepackage{comment, enumitem, amsthm, amssymb, amsmath, amsfonts, graphics, graphicx, placeins, float, subfigure}
+\usepackage[top = 1.25in, bottom = 1.25in, left = 1in, right = 1in]{geometry}
+\usepackage{minted}
+\usepackage{longtable}
+\graphicspath{{images/}}
+\newcommand{\sub}[1]{$_{#1}$}
+\author{Bishoy Boshra Labib\and Nada Kamel Abdelhady}
+\date{Dec. $1^\text{st}, 2016$}
+\title{CSCE $4101$ - Compiler Design\\Semantic Analyzer and Code Generator for $C-$}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+\section{Attribute Grammar}
+The following grammar shows all the semantic rules needed for the tasks of:
+\begin{enumerate}[label = \Roman*.]
+\item \textbf{Semantic Analysis}, including symbol table construction, type checking and error handling
+\item \textbf{Code Generation}
+\end{enumerate}
+
+\subsection{Program \& Declarations}
+\begin{enumerate}[label = \arabic*.]
+\item \textit{program} $\rightarrow$ \textit{type} \textit{identifier} (\textit{parameters} ) "\{" \textit{declaration\_list} \textit{compound\_statement} "\}"
+\begin{enumerate}[label = \roman*.]
+\item \textit{program}.\textbf{code} = \textit{compound\_statement}.\textbf{code}
+\end{enumerate}
+
+\item \textit{declaration\_list} $\rightarrow$ \textit{declaration\_list} \textit{variable\_declaration}
+
+\item \textit{ declaration\_list } $\rightarrow$ \textit{ variable\_declaration }
+
+\item \textit{ variable\_declaration } $\rightarrow$ \textit{type} \textit{identifier} ;
+\begin{enumerate}[label = \roman*.]
+\item symbol\_table.put(\textit{type}.\textbf{data\_type}, \textit{identifier}.lexim, simple, 0)
+\end{enumerate}
+
+\item \textit{ variable\_declaration } $\rightarrow$ \textit{ type } \textit{ identifier } "[" \textit{ integer\_literal } "]" ;
+\begin{enumerate}[label = \roman*.]
+\item symbol\_table.put(\textit{type}.\textbf{data\_type}, \textit{identifier}.lexim, array, \textit{integer\_literal}.\textbf{value})
+\end{enumerate}
+
+\item \textit{ type } $\rightarrow$ int
+\begin{enumerate}[label = \roman*.]
+\item \textit{type}.\textbf{data\_type} = integer
+\end{enumerate}
+
+\textit{ type } $\rightarrow$ void
+\begin{enumerate}[label = \roman*.]
+\item \textit{type}.\textbf{data\_type} = void
+\end{enumerate}
+
+\textit{ type } $\rightarrow$ float
+\begin{enumerate}[label = \roman*.]
+\item \textit{type}.\textbf{data\_type} = real
+\end{enumerate}
+
+\item \textit{ parameters } $\rightarrow$ \textit{ parameter\_list }
+
+\item \textit{ parameters } $\rightarrow$ void
+
+\item \textit{ parameter\_list } $\rightarrow$ \textit{ parameter\_list } , \textit{ parameter }
+
+\item \textit{ parameter\_list } $\rightarrow$ \textit{ parameter}
+
+\item \textit{ parameter } $\rightarrow$ \textit{ type } \textit{ identifier }
+\begin{enumerate}[label = \roman*.]
+\item symbol\_table.insert(\textit{type}.\textbf{data\_type}, \textit{identifier}.leximname, simple)
+\end{enumerate}
+
+\item \textit{ parameter } $\rightarrow$ \textit{ type } \textit{ identifier } "[ ]"
+\begin{enumerate}[label = \roman*.]
+\item symbol\_table.insert(\textit{type}.\textbf{data\_type}, \textit{identifier}.lexim, array)
+\end{enumerate}
+
+\item \textit{ compound\_statement } $\rightarrow$ "\{" \textit{ statement\_list } "\}"
+\begin{enumerate}[label = \roman*.]
+\item \textit{compound\_statement}.\textbf{code} = \textit{statement\_list}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ statement\_list \sub{1} } $\rightarrow$ \textit{ statement\_list \sub{2}} \textit{ statement }
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement\_list} \sub{1}.\textbf{code} = \textit{statement\_list} \sub{2} + \textit{statement}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ statement\_list } $\rightarrow$ \textit{ empty }
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement\_list} \sub{1}.\textbf{code} = empty
+\end{enumerate}
+
+\item \textit{ statement } $\rightarrow$ \textit{ compound\_statement }
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement}.\textbf{code} = \textit{compound\_statement}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ statement } $\rightarrow$ \textit{ assignment\_statement }
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement}.\textbf{code} = \textit{assignment\_statement}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ statement } $\rightarrow$ \textit{ selection\_statement}
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement}.\textbf{code} = \textit{selection\_statement}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ statement } $\rightarrow$ \textit{ iteration\_statement} 
+\begin{enumerate}[label = \roman*.]
+\item \textit{statement}.\textbf{code} = \textit{iteration\_statement}.\textbf{code}
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\subsection{Variables, Expressions \& Assignment}
+\begin{enumerate}[label = \arabic*.]
+
+\item \textit{ assignment\_statement } $\rightarrow$ \textit{ variable } = \textit{ expression} 
+\begin{enumerate}[label = \roman*.]
+\item \textit{assignment\_statement}.\textbf{data\_type} = (\textit{variable}.\textbf{data\_type} == \textit{expression}.\textbf{data\_type}) ? \textit{variable}.\textbf{data\_type} : error
+\item
+\begin{enumerate}[label = \alph*.]
+\item assignment\_instruction = new Instruction(assign, \textit{variable}.\textbf{address}, \textit{expression}.\textbf{value})
+\item \textit{assignment\_statement}.\textbf{code} = \textit{variable}.\textbf{code} + \textit{expression}.\textbf{code} + assignment\_instruction
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ variable } $\rightarrow$ \textit{ identifier }\footnote{While the variable address attribute is statically bound in this rule, it's dynamically bound in the following one}
+\begin{enumerate}[label = \roman*.]
+\item \textit{variable}.\textbf{data\_type} = symbol\_table.lookup(\textit{identifier}.lexim).\textbf{data\_type}
+\item \textit{variable}.\textbf{address} = symbol\_table.lookup(\textit{identifier}.lexim).\textbf{address}
+\item \textit{variable}.\textbf{code} = empty
+\end{enumerate}
+
+\item \textit{ variable } $\rightarrow$ \textit{ identifier } "[" \textit{ expression } "]"
+\begin{enumerate}[label = \roman*.]
+\item \textit{variable}.\textbf{data\_type} = symbol\_table.lookup(\textit{identifier}.lexim).\textbf{data\_type}
+\item symbol = symbol\_table.lookup(\textit{identifier}.lexim)
+\item \textit{variable}.\textbf{base\_address} = symbol.\textbf{address}
+\item \textit{variable}.\textbf{address} = \textit{variable}.\textbf{base\_address} + \textit{expression}.\textbf{value} * symbol.\textbf{data\_type}.entity\_size
+\item
+\begin{enumerate}[label = \alph*.]
+\item offset = \textit{expression}.\textbf{value}
+\item multiply = new Instruction(mul, offset, offset, symbol.\textbf{data\_type}.size)
+\item add = new Instruction(add, \textit{variable}.\textbf{address}, \textit{variable}.\textbf{base\_address}, offset )
+\item \textit{variable}.\textbf{code} = \textit{expression}.\textbf{code} + multiply + add
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ expression \sub{1}} $\rightarrow$ \textit{ expression \sub{1}} \textit{ relational\_operator } \textit{ addition\_expression }\footnote{For simplicity, the use of temporary variables to compute \texttt{value} attributes is not reflected in this grammar}
+\begin{enumerate}[label = \roman*.]
+\item \textit{expression}.\textbf{data\_type} = integer
+\item \begin{enumerate}[label = \alph*.]
+\item relational\_instruction = new Instruction(\textit{relation\_operator}.op, \textit{expression}\sub{1}.\textbf{value}, \textit{expression} \sub{2}.\textbf{value}, \textit{addition\_expression}.\textbf{value})
+\item \textit{expression}\sub{1}.\textbf{code} = \textit{expression}\sub{2}.\textbf{code} + \textit{addition\_expression}.\textbf{code} + relational\_instruction
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ expression } $\rightarrow$ \textit{ addition\_expression} 
+\begin{enumerate}[label = \roman*.]
+\item \textit{expression}.\textbf{data\_type} = \textit{addition\_expression}.\textbf{data\_type}
+\item \textit{expression}.\textbf{value} = \textit{addition\_expression}.\textbf{value}
+\item \textit{expression}.\textbf{code} = \textit{addition\_expression}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow < $
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$<$'
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow$ $<=$
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$<=$'
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow$ $>$
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$>$'
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow$ $>=$
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$>=$'
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow$ $==$
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$==$'
+\end{enumerate}
+
+\item \textit{ relational\_operator } $\rightarrow$ $!=$
+\begin{enumerate}[label = \roman*.]
+\item \textit{relational\_operator}.op = '$!=$'
+\end{enumerate}
+
+
+\item \textit{ addition\_expression \sub{1}} $\rightarrow$ \textit{ addition\_expression \sub{2}} \textit{ addition\_operator } \textit{ term }
+\begin{enumerate}[label = \roman*.]
+\item \textit{addition\_expression}\sub{1}.\textbf{data\_type} = (\textit{addition\_expression}\sub{2}.\textbf{data\_type} == error $||$ \textit{term}.\textbf{data\_type} == error $||$ \textit{addition\_expression}\sub{2}.\textbf{data\_type} != \textit{term}.\textbf{data\_type}) ? error : \textit{term}.\textbf{data\_type}
+\item \textit{addition\_expression}\sub{1}.\textbf{value} = \textit{addition\_expression}\sub{2}.\textbf{value} \textit{addition\_operator}.op \textit{term}.\textbf{value}
+\item \begin{enumerate}[label = \alph*.]
+\item addition\_instruction = new Instruction(\textit{addition\_operator}.op, \textit{addition\_expression}\sub{1}.\textbf{value}, \textit{addition\_expression}\sub{2}.\textbf{value}, \textit{term}.\textbf{value})
+\item \textit{addition\_expression}.\textbf{code} = \textit{addition\_expression}\sub{2}.\textbf{code} + \textit{term}.\textbf{code} + addition\_instruction
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ addition\_expression } $\rightarrow$ \textit{ term }
+\begin{enumerate}[label = \roman*.]
+\item \textit{addition\_expression}.\textbf{data\_type} = \textit{term}.\textbf{data\_type}
+\item \textit{addition\_expression}.\textbf{value} = \textit{term}.\textbf{value}
+\item \textit{addition\_expression}.\textbf{code} = \textit{term}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ addition\_operator } $\rightarrow +$
+\begin{enumerate}[label = \roman*.]
+\item \textit{addition\_operator}.op = '$+$'
+\end{enumerate}
+
+\item \textit{ addition\_operator } $\rightarrow -$
+\begin{enumerate}[label = \roman*.]
+\item \textit{addition\_operator}.op = '$-$'
+\end{enumerate}
+
+\item \textit{term\sub{1}} $\rightarrow$ \textit{term\sub{2}} \textit{multiplication\_operator} \textit{factor}
+\begin{enumerate}[label = \roman*.]
+\item \textit{term} \sub{1}.\textbf{data\_type} = (\textit{term} \sub{2}.\textbf{data\_type} != \textit{factor}.\textbf{data\_type} $||$ \textit{term} \sub{2}.\textbf{data\_type} == error $||$ \textit{factor}.\textbf{data\_type} == error) ? error : \textit{factor}.\textbf{data\_type}
+\item
+\begin{enumerate}[label = \alph*.]
+\item multiply\_instruction = new Instruction(\textit{multiplication\_operator}.op, \textit{term} \sub{1}.\textbf{value}, \textit{term} \sub{2}.\textbf{value}, \textit{factor}.\textbf{value})
+\item \textit{term}\sub{1}.\textbf{code} = \textit{term}\sub{2}.\textbf{code} + \textit{factor}.\textbf{code} + multiply\_instruction
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ term } $\rightarrow$ \textit{ factor }
+\begin{enumerate}[label = \roman*.]
+\item \textit{term}.\textbf{data\_type} = \textit{factor}.\textbf{data\_type}
+\item \textit{term}.\textbf{value} = \textit{factor}.\textbf{value}
+\item \textit{term}.\textbf{code} = \textit{factor}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ multiplication\_operator } $\rightarrow *$
+\begin{enumerate}[label = \roman*.]
+\item \textit{multiplication\_operator}.op = '$*$'
+\end{enumerate}
+
+\item \textit{ multiplication\_operator } $\rightarrow /$
+\begin{enumerate}[label = \roman*.]
+\item \textit{multiplication\_operator}.op = '$/$'
+\end{enumerate}
+
+\item \textit{ factor } $\rightarrow$ (\textit{ expression} )
+\begin{enumerate}[label = \roman*.]
+\item \textit{factor}.\textbf{data\_type} = \textit{expression}.\textbf{data\_type}
+\item \textit{factor}.\textbf{value} = \textit{expression}.\textbf{value}
+\item \textit{factor}.\textbf{code} = \textit{expression}.\textbf{code}
+\end{enumerate}
+
+\item \textit{ factor } $\rightarrow$ \textit{ variable }
+\begin{enumerate}[label = \roman*.]
+\item \textit{factor}.\textbf{data\_type} = \textit{variable}.\textbf{data\_type}
+\item \begin{enumerate}[label = \alph*.]
+\item load\_instruction = new Instruction(Load, \textit{variable}.\textbf{address}, \textit{factor}.\textbf{value})
+\item \textit{factor}.\textbf{code} = \textit{variable}.\textbf{code} + load\_instruction
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ factor } $\rightarrow$ \textit{ integer\_literal }
+\begin{enumerate}[label = \roman*.]
+\item \textit{factor}.\textbf{data\_type} = integer
+\item \textit{factor}.\textbf{value} = \textit{integer\_literal}.\textbf{value}
+\end{enumerate}
+
+\item \textit{ factor } $\rightarrow$ \textit{ real\_literal }
+\begin{enumerate}[label = \roman*.]
+\item \textit{factor}.\textbf{data\_type} = real
+\item \textit{factor}.\textbf{value} = \textit{real\_literal}.\textbf{value}
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\subsection{Control Statements}
+\begin{enumerate}[label = \arabic*.]
+
+\item \textit{ selection\_statement } $\rightarrow$ if (\textit{ expression} ) \textit{ statement }
+\begin{enumerate}[label = \roman*.]
+\item if (\textit{expression}.\textbf{data\_type} $!=$ integer) error\_type(\textit{selection\_statement})
+\item \begin{enumerate}[label = \alph*.]
+\item exit\_if\_label = new\_label()
+\item exit\_if\_jump = new instruction(jump\_z, \textit{expression}.\textbf{value}, exit\_if\_label)
+\item \textit{selection\_statement}.\textbf{code} = \textit{expression}.\textbf{code} + exit\_if\_jump + \textit{statement}.\textbf{code} + exit\_if\_label
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ selection\_statement } $\rightarrow$ if (\textit{ expression} ) \textit{ statement \sub{1}} else \textit{ statement\sub{2}} 
+\begin{enumerate}[label = \roman*.]
+\item if (\textit{expression}.\textbf{data\_type} $!=$ integer) error\_type(\textit{selection\_statement})
+\item \begin{enumerate}[label = \alph*.]
+\item exit\_if\_label = new\_label()
+\item exit\_else\_label = new\_label()
+\item exit\_if\_jump = new instruction(jump\_z, \textit{expression}.\textbf{value}, exit\_if\_label)
+\item exit\_else\_jump = new instruction(jump, exit\_else\_label)
+\item \textit{selection\_statement}.\textbf{code} = \textit{expression}.\textbf{code} + exit\_if\_jump + \textit{statement}\sub{1}.\textbf{code} + exit\_else\_jump + exit\_if\_label + \textit{statement}\sub{2}.\textbf{code} + exit\_else\_label
+\end{enumerate}
+\end{enumerate}
+
+\item \textit{ iteration\_statement } $\rightarrow$ while(\textit{ expression} ) \textit{ statement} 
+\begin{enumerate}[label = \roman*.]
+\item \begin{enumerate}[label = \alph*.]
+\item enter\_while\_label = new\_label()
+\item enter\_while\_jump = new instruction(jump, enter\_while\_label)
+\item exit\_while\_label = new\_label()
+\item exit\_while\_jump = new instruction(jump\_z, \textit{expression}.\textbf{value}, exit\_while\_label)
+\item \textit{iteration\_statement}.\textbf{code} = enter\_while\_label + \textit{expression}.\textbf{code} + exit\_while\_jump + \textit{statement}.\textbf{code} + enter\_while\_jump
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Symbol Table Structure}
+The symbol table was implemented as a hash table, mapping a variable name to a variable object containing the following fields:
+\begin{enumerate}
+\item identifier
+\item type
+\item category (simple or array)
+\item array size (in case of array)
+\item relative memory address
+\item declaration line number
+\end{enumerate}
+This structure allowed the execution of the following tasks:
+\begin{enumerate}
+\item check if a variable has been defined (semantic analysis)
+\item check for multiple definitions of a variable of the same name (semantic analysis)
+\item check variable type (semantic analysis)
+\item retrieve memory address of a variable (code generation)
+\item retrieve type of a variable (code generation)
+\end{enumerate}
+
+You can find the implementation of the symbol table in \ref{symbol_table_label}, and the implementation of the variable name class with the hashing function in \ref{variable_name_label}
+
+
+\section{Instruction Set Architecture}
+The following are the instructions used in the generated code\footnote{A lot of these instructions are most likely to be implemented only as pseudo-instructions, especially in a RISC architecture. Notice also that the code might contain labels, which are only markers for certain addresses and not instructions that get executed.}
+\begin{enumerate}
+\item \texttt{Jump L}\\ \textit{unconditionally jump to label $L$}
+\item \texttt{JumpZ rs L}\\ \textit{jump to Label $L$, provided that $rs = 0$}
+
+\item \texttt{Assign rs rt}\\ \textit{assign $rs = rt$}
+\item \texttt{Add rs rt rd}\\ \textit{assign $rs = rt + rd$}
+\item \texttt{Sub rs rt rd}\\ \textit{assign $rs = rt - rd$}
+\item \texttt{Mul rs rt rd}\\ \textit{assign $rs = rt * rd$}
+\item \texttt{Div rs rt rd}\\ \textit{assign $rs = rt / rd$}
+
+\item \texttt{SetL rs rt rd}\\ \textit{assign $rs = \; rt < rd \; ? 1 \; : 0$}
+\item \texttt{SetLE rs rt rd}\\ \textit{assign $rs = \; rt \leq rd\;  ? 1\;  : 0$}
+\item \texttt{SetG rs rt rd}\\ \textit{assign $rs = \; rt > rd \; ? 1 \; : 0$}
+\item \texttt{SetGE rs rt rd}\\ \textit{assign $rs = \; rt \geq rd \; ? 1 \; : 0$}
+\item \texttt{SetE rs rt rd}\\ \textit{assign $rs = \; rt == rd \; ? 1 \; : 0$}
+\item \texttt{SetNE rs rt rd}\\ \textit{assign $rs = \; rt \,!= rd \; ? 1 \; : 0$}
+	
+\item \texttt{Load rs rt}\\ \textit{assign $rt = Memory[rs]$}
+\item \texttt{Store rs rt}\\ \textit{assign $Memory[rs] = rt$}
+\end{enumerate}
+
+\section{Source Code}
+\subsection{DataType}
+An enumeration for data types of our variables and constants
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/DataType.java}
+\subsection{VariableName}
+\label{variable_name_label}
+The sole purpose of this class was to wrap a string (representing a variable name) in an object, where we can implement our own hashing function.
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/VariableName.java}
+\subsection{VariableCategory}
+An enumeration for variable category
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/VariableCategory.java}
+\subsection{Variable}
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/Variable.java}
+\subsection{SymbolTable}
+\label{symbol_table_label}
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/SymbolTable.java}
+\subsection{SemanticAnalyzer}
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/SemanticAnalyzer.java}
+\subsection{InstructionType}
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/InstructionType.java}
+\subsection{Instrucion}
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/Instruction.java}
+\subsection{CodeGenerator}
+Notice that I have also implemented a scheme that keeps track of the number of temporary registers used at a moment, thus the generated code usually does not use temporary register with large indeces. However, there exists a much more efficient scheme that time did not permit to implement.
+\inputminted[xleftmargin = -40pt, xrightmargin = -40pt, frame = single, linenos]{java}{src/CodeGenerator.java}
+\section{Test Cases}
+\begin{enumerate}[label = \Roman*.]
+\item The program was tested on the following input:
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{c}{samples/input_0.c}
+The output of the parser was as follows, showing that it worked correctly.\footnote{I have manually commented some the instructions in this example, to help explain further the instruction set architecture used. Notice also that we do not show the output of the scanner and the parser for conciseness, since at this stage, we are only interested in the work of the semantic analyzer and the code generator.}
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{python}{samples/output_0.txt}
+
+\item The program was tested on the following input:
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{c}{samples/input_3.c}
+The output of the parser was as follows, showing that it worked correctly.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{python}{samples/output_3.txt}
+
+\item The program was tested on the following code, where the variable $x$ is define twice.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{c}{samples/input_1.c}
+The output of the parser was as follows, showing that it worked correctly.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{python}{samples/output_1.txt}
+
+\item The program was tested on the following code, where the variable $x$ is not defined before use.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{c}{samples/input_2.c}
+The output of the parser was as follows, showing that it worked correctly.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{python}{samples/output_2.txt}
+
+\item The program was tested on the following code, where the variable $x$ is assigned to $y$ which has a different type.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{c}{samples/input_4.c}
+The output of the parser was as follows, showing that it worked correctly.
+\inputminted[xleftmargin = -20pt, xrightmargin = -20pt, frame = single, linenos]{python}{samples/output_4.txt}
+\end{enumerate}
+
+\end{document}

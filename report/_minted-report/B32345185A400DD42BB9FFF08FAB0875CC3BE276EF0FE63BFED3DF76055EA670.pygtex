@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZdl{}gcc \PYGZhy{}o parser.out lex.yy.c
+\end{Verbatim}

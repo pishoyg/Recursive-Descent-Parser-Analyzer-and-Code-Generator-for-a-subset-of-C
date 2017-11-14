@@ -1,0 +1,5 @@
+line      address   type      name      category  array size
+4         2         real      y         simple    0         
+3         0         integer   x         simple    0         
+type mismatch between operands of = on line 6
+

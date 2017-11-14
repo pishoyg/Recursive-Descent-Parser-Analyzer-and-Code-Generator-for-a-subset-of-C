@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{line}      \PYG{n}{address}   \PYG{n+nb}{type}      \PYG{n}{name}      \PYG{n}{category}  \PYG{n}{array} \PYG{n}{size}
+\PYG{l+m+mi}{3}         \PYG{l+m+mi}{0}         \PYG{n}{integer}   \PYG{n}{y}         \PYG{n}{array}     \PYG{l+m+mi}{5}         
+\PYG{n}{Undefined} \PYG{n}{variable}\PYG{p}{:} \PYG{n}{x}
+\end{Verbatim}

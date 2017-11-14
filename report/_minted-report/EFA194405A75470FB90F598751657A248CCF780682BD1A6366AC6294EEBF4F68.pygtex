@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{line}      \PYG{n}{address}   \PYG{n+nb}{type}      \PYG{n}{name}      \PYG{n}{category}  \PYG{n}{array} \PYG{n}{size}
+\PYG{l+m+mi}{4}         \PYG{l+m+mi}{2}         \PYG{n}{real}      \PYG{n}{y}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{l+m+mi}{3}         \PYG{l+m+mi}{0}         \PYG{n}{integer}   \PYG{n}{x}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{n+nb}{type} \PYG{n}{mismatch} \PYG{n}{between} \PYG{n}{operands} \PYG{n}{of} \PYG{o}{=} \PYG{n}{on} \PYG{n}{line} \PYG{l+m+mi}{6}
+\end{Verbatim}

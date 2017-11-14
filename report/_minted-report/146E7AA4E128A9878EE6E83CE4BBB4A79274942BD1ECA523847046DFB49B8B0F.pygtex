@@ -1,0 +1,51 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{line}      \PYG{n}{address}   \PYG{n+nb}{type}      \PYG{n}{name}      \PYG{n}{category}  \PYG{n}{array} \PYG{n}{size}
+\PYG{l+m+mi}{4}         \PYG{l+m+mi}{2}         \PYG{n}{integer}   \PYG{n}{y}         \PYG{n}{array}     \PYG{l+m+mi}{5}         
+\PYG{l+m+mi}{3}         \PYG{l+m+mi}{0}         \PYG{n}{integer}   \PYG{n}{x}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{5}         \PYG{l+s+s1}{\PYGZsq{}t2 contains 5}
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{3}         \PYG{l+s+s1}{\PYGZsq{}t3 contains 3}
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t2}   \PYG{n}{t3}   \PYG{l+s+s1}{\PYGZsq{}t1 contains 3 + 5}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t3}        \PYG{l+s+s1}{\PYGZsq{}t3 contains content of memory location 0 (address}
+                         \PYG{l+s+s1}{\PYGZsq{}of x) thus, t3 contains value of x}
+\PYG{n}{Assign}    \PYG{n}{t4}   \PYG{l+m+mi}{7}         \PYG{l+s+s1}{\PYGZsq{}t4 contains 7}
+\PYG{n}{Add}       \PYG{n}{t2}   \PYG{n}{t3}   \PYG{n}{t4}   \PYG{l+s+s1}{\PYGZsq{}t2 contains x + 7}
+\PYG{n}{Mul}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}t0 contains (3 + 5) * (x + 7)}
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}        \PYG{l+s+s1}{\PYGZsq{}store content of t0 into memory location 0 (address}
+                         \PYG{l+s+s1}{\PYGZsq{}of x)}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}   \PYG{n}{t0}         \PYG{l+s+s1}{\PYGZsq{}t0 contains content of x}
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{3}         \PYG{l+s+s1}{\PYGZsq{}t2 contains array index}
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{2}         \PYG{l+s+s1}{\PYGZsq{}t1 contains address of y}
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{l+m+mi}{2}    \PYG{l+s+s1}{\PYGZsq{}t2 contains offset}
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}t1 contains address of y[3]}
+\PYG{n}{Store}     \PYG{n}{t1}   \PYG{n}{t0}        \PYG{l+s+s1}{\PYGZsq{}store value of t0(x) into address t1 (y[3])}
+\PYG{n}{Assign}    \PYG{n}{t0}   \PYG{l+m+mi}{5}    
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}        \PYG{l+s+s1}{\PYGZsq{}store value of t0 into memory location 0 (x)}
+\PYG{n}{Assign}    \PYG{n}{t0}   \PYG{l+m+mi}{5}    
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}   
+\PYG{n}{L0}\PYG{p}{:}                      \PYG{l+s+s1}{\PYGZsq{}label used to repeat the while loop}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t1}        \PYG{l+s+s1}{\PYGZsq{}t1 contains value of x}
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{5}         \PYG{l+s+s1}{\PYGZsq{}t2 contains 5}
+\PYG{n}{SetE}      \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}compare t1 and t2, and set t0 accordingly}
+\PYG{n}{JumpZ}     \PYG{n}{t0}   \PYG{n}{L1}        \PYG{l+s+s1}{\PYGZsq{}if t0 is zero, exit while loop}
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{0}         \PYG{l+s+s1}{\PYGZsq{}t3 contains array index}
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{2}         \PYG{l+s+s1}{\PYGZsq{}t2 contains address of y}
+\PYG{n}{Mul}       \PYG{n}{t3}   \PYG{n}{t3}   \PYG{l+m+mi}{2}    \PYG{l+s+s1}{\PYGZsq{}t3 contains offset}
+\PYG{n}{Add}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{n}{t3}   \PYG{l+s+s1}{\PYGZsq{}t2 contains address of y[0]}
+\PYG{n}{Load}      \PYG{n}{t2}   \PYG{n}{t1}        \PYG{l+s+s1}{\PYGZsq{}t1 contains content of y[0]}
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{6}         \PYG{l+s+s1}{\PYGZsq{}t2 contains 6}
+\PYG{n}{SetE}      \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}compare t1(y[0]) and t2(6), and set t0 accordingly}
+\PYG{n}{JumpZ}     \PYG{n}{t0}   \PYG{n}{L2}        \PYG{l+s+s1}{\PYGZsq{}jump to the else part, if the expression is false}
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{7}         \PYG{l+s+s1}{\PYGZsq{}t1 = 7}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t2}        \PYG{l+s+s1}{\PYGZsq{}t2 = x (because memory\PYGZus{}address(x) = 0)}
+\PYG{n}{Add}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}t0 = 7 + x}
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}        \PYG{l+s+s1}{\PYGZsq{}store it into x}
+\PYG{n}{Jump}      \PYG{n}{L3}             \PYG{l+s+s1}{\PYGZsq{}skip the else part of the if\PYGZhy{}statement}
+\PYG{n}{L2}\PYG{p}{:}                      \PYG{l+s+s1}{\PYGZsq{}label used to skip if part and jump to else part}
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{7}         \PYG{l+s+s1}{\PYGZsq{}t1 = 7}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t2}        \PYG{l+s+s1}{\PYGZsq{}t2 = value of x}
+\PYG{n}{Sub}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   \PYG{l+s+s1}{\PYGZsq{}t0 = t1 \PYGZhy{} t2 = 7 \PYGZhy{} x}
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}        \PYG{l+s+s1}{\PYGZsq{}x = t0}
+\PYG{n}{L3}\PYG{p}{:}                      \PYG{l+s+s1}{\PYGZsq{}label used to skip the else part}
+\PYG{n}{Jump}      \PYG{n}{L0}             \PYG{l+s+s1}{\PYGZsq{}go to the start of the while loop}
+\PYG{n}{L1}\PYG{p}{:}                      \PYG{l+s+s1}{\PYGZsq{}label used to exit the while loop}
+\end{Verbatim}

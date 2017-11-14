@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{VariableName} \PYG{o}{\PYGZob{}}
+	\PYG{n}{String} \PYG{n}{Name}\PYG{o}{;}
+
+	\PYG{k+kd}{final} \PYG{k+kd}{static} \PYG{k+kt}{int} \PYG{n}{MOD} \PYG{o}{=} \PYG{l+m+mi}{1000003}\PYG{o}{;} \PYG{c+c1}{// a large prime}
+	\PYG{k+kd}{final} \PYG{k+kd}{static} \PYG{k+kt}{int} \PYG{n}{BASE} \PYG{o}{=} \PYG{l+m+mi}{128}\PYG{o}{;}
+
+	\PYG{n}{VariableName}\PYG{o}{(}\PYG{n}{String} \PYG{n}{name}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Name} \PYG{o}{=} \PYG{n}{name}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{int} \PYG{n+nf}{hashCode}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k+kt}{int} \PYG{n}{ans} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{;}
+		\PYG{k}{for} \PYG{o}{(}\PYG{k+kt}{char} \PYG{n}{c} \PYG{o}{:} \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Name}\PYG{o}{.}\PYG{n+na}{toCharArray}\PYG{o}{())}
+			\PYG{n}{ans} \PYG{o}{=} \PYG{o}{(}\PYG{n}{ans} \PYG{o}{*} \PYG{n}{BASE} \PYG{o}{+} \PYG{n}{c}\PYG{o}{)} \PYG{o}{\PYGZpc{}} \PYG{n}{MOD}\PYG{o}{;}
+		\PYG{k}{return} \PYG{n}{ans}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{boolean} \PYG{n+nf}{equals}\PYG{o}{(}\PYG{n}{Object} \PYG{n}{other}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return}
+			\PYG{n}{other} \PYG{o}{!=} \PYG{k+kc}{null}
+			\PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{VariableName}\PYG{o}{.}\PYG{n+na}{class}\PYG{o}{.}\PYG{n+na}{isInstance}\PYG{o}{(}\PYG{n}{other}\PYG{o}{)}
+			\PYG{o}{\PYGZam{}\PYGZam{}} \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Name}\PYG{o}{.}\PYG{n+na}{equals}\PYG{o}{(((}\PYG{n}{VariableName}\PYG{o}{)} \PYG{n}{other}\PYG{o}{).}\PYG{n+na}{Name}\PYG{o}{);}
+	\PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

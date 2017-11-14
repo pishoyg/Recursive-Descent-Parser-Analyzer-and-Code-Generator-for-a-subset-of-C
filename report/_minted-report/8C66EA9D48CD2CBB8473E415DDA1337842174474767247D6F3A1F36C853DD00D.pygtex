@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kd}{enum} \PYG{n}{InstructionType} \PYG{o}{\PYGZob{}}
+	\PYG{n}{Jump}\PYG{o}{,}
+	\PYG{n}{JumpZ}\PYG{o}{,}
+
+	\PYG{n}{Assign}\PYG{o}{,}
+	
+	\PYG{n}{Label}\PYG{o}{,}
+	
+	\PYG{n}{Add}\PYG{o}{,}
+	\PYG{n}{Sub}\PYG{o}{,}
+	\PYG{n}{Mul}\PYG{o}{,}
+	\PYG{n}{Div}\PYG{o}{,}
+
+	\PYG{n}{SetL}\PYG{o}{,}
+	\PYG{n}{SetLE}\PYG{o}{,}
+	\PYG{n}{SetG}\PYG{o}{,}
+	\PYG{n}{SetGE}\PYG{o}{,}
+	\PYG{n}{SetE}\PYG{o}{,}
+	\PYG{n}{SetNE}\PYG{o}{,}
+	
+	\PYG{n}{Load}\PYG{o}{,}
+	\PYG{n}{Store}\PYG{o}{;}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kd}{enum} \PYG{n}{VariableCategory}
+\PYG{o}{\PYGZob{}}
+	\PYG{n}{simple}\PYG{o}{,} \PYG{n}{array}\PYG{o}{;}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

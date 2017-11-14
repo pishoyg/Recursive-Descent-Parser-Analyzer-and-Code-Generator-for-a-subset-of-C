@@ -1,0 +1,2 @@
+redefinition of x in line 4; already defined in line 3;
+

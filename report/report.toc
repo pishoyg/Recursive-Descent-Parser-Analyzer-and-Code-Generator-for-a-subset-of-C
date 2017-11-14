@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Attribute Grammar}{2}
+\contentsline {subsection}{\numberline {1.1}Program \& Declarations}{2}
+\contentsline {subsection}{\numberline {1.2}Variables, Expressions \& Assignment}{3}
+\contentsline {subsection}{\numberline {1.3}Control Statements}{6}
+\contentsline {section}{\numberline {2}Symbol Table Structure}{7}
+\contentsline {section}{\numberline {3}Instruction Set Architecture}{8}
+\contentsline {section}{\numberline {4}Source Code}{9}
+\contentsline {subsection}{\numberline {4.1}DataType}{9}
+\contentsline {subsection}{\numberline {4.2}VariableName}{9}
+\contentsline {subsection}{\numberline {4.3}VariableCategory}{10}
+\contentsline {subsection}{\numberline {4.4}Variable}{10}
+\contentsline {subsection}{\numberline {4.5}SymbolTable}{12}
+\contentsline {subsection}{\numberline {4.6}SemanticAnalyzer}{14}
+\contentsline {subsection}{\numberline {4.7}InstructionType}{16}
+\contentsline {subsection}{\numberline {4.8}Instrucion}{17}
+\contentsline {subsection}{\numberline {4.9}CodeGenerator}{18}
+\contentsline {section}{\numberline {5}Test Cases}{26}

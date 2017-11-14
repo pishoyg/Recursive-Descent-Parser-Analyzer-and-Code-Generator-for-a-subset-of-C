@@ -1,0 +1,80 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{java.util.HashMap}\PYG{o}{;}
+
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{SymbolTable} \PYG{o}{\PYGZob{}}
+	\PYG{k+kd}{private} \PYG{n}{HashMap}\PYG{o}{\PYGZlt{}}\PYG{n}{VariableName}\PYG{o}{,} \PYG{n}{Variable}\PYG{o}{\PYGZgt{}} \PYG{n}{Table}
+		\PYG{o}{=} \PYG{k}{new} \PYG{n}{HashMap}\PYG{o}{\PYGZlt{}}\PYG{n}{VariableName}\PYG{o}{,} \PYG{n}{Variable}\PYG{o}{\PYGZgt{}();}
+	\PYG{k+kd}{private} \PYG{k+kt}{int} \PYG{n}{DataSize} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{;}
+
+	\PYG{k+kd}{private} \PYG{k+kd}{final} \PYG{k+kd}{static} \PYG{n}{String} \PYG{n}{PrintFormat} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}\PYGZpc{}\PYGZhy{}10s\PYGZpc{}\PYGZhy{}10s\PYGZpc{}\PYGZhy{}10s\PYGZpc{}\PYGZhy{}10s\PYGZpc{}\PYGZhy{}10s\PYGZpc{}\PYGZhy{}10s\PYGZdq{}}\PYG{o}{;}
+
+	\PYG{c+cm}{/*}
+\PYG{c+cm}{	 * The constructor of the symbol table is passed a node of the syntax}
+\PYG{c+cm}{	 * representing the declaration list}
+\PYG{c+cm}{	 * }
+\PYG{c+cm}{	 * The constructor stores all variables in the hash table, so they will be}
+\PYG{c+cm}{	 * available for further retrieval}
+\PYG{c+cm}{	 */}
+	\PYG{n}{SymbolTable}\PYG{o}{(}\PYG{n}{Node} \PYG{n}{declarationList}\PYG{o}{)} \PYG{k+kd}{throws} \PYG{n}{Exception} \PYG{o}{\PYGZob{}}
+		\PYG{k}{for} \PYG{o}{(}\PYG{n}{Node} \PYG{n}{declaration} \PYG{o}{=} \PYG{n}{declarationList}\PYG{o}{;} \PYG{n}{declaration} \PYG{o}{!=} \PYG{k+kc}{null}\PYG{o}{;}
+				\PYG{n}{declaration} \PYG{o}{=} \PYG{n}{declaration}\PYG{o}{.}\PYG{n+na}{getSibling}\PYG{o}{())} \PYG{o}{\PYGZob{}}
+			\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{declare}\PYG{o}{(}\PYG{n}{declaration}\PYG{o}{,}
+					\PYG{n}{declaration}\PYG{o}{.}\PYG{n+na}{getChild}\PYG{o}{(}\PYG{l+m+mi}{0}\PYG{o}{),}
+					\PYG{n}{declaration}\PYG{o}{.}\PYG{n+na}{getChildrenCount}\PYG{o}{()} \PYG{o}{==} \PYG{l+m+mi}{2} \PYG{o}{?}
+							\PYG{n}{declaration}\PYG{o}{.}\PYG{n+na}{getChild}\PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{)}
+							\PYG{o}{:} \PYG{k+kc}{null}\PYG{o}{);}
+		\PYG{o}{\PYGZcb{}}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{c+cm}{/*}
+\PYG{c+cm}{	 * return a variable defined by this name}
+\PYG{c+cm}{	 */}
+	\PYG{k+kd}{public} \PYG{n}{Variable} \PYG{n+nf}{lookUp}\PYG{o}{(}\PYG{n}{String} \PYG{n}{name}\PYG{o}{)} \PYG{k+kd}{throws} \PYG{n}{Exception} \PYG{o}{\PYGZob{}}
+		\PYG{k}{if} \PYG{o}{(!}\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{isDefined}\PYG{o}{(}\PYG{n}{name}\PYG{o}{))}
+			\PYG{k}{throw} \PYG{k}{new} \PYG{n}{Exception}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Undefined variable: \PYGZdq{}} \PYG{o}{+} \PYG{n}{name}\PYG{o}{);}
+		\PYG{k}{else} \PYG{k}{return} \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Table}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{k}{new} \PYG{n}{VariableName}\PYG{o}{(}\PYG{n}{name}\PYG{o}{));}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{c+cm}{/*}
+\PYG{c+cm}{	 * tell whether or not the symbol table contains a variable with this name}
+\PYG{c+cm}{	 */}
+	\PYG{k+kd}{public} \PYG{k+kt}{boolean} \PYG{n+nf}{isDefined}\PYG{o}{(}\PYG{n}{String} \PYG{n}{name}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Table}\PYG{o}{.}\PYG{n+na}{containsKey}\PYG{o}{(}\PYG{k}{new} \PYG{n}{VariableName}\PYG{o}{(}\PYG{n}{name}\PYG{o}{));}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{c+cm}{/*}
+\PYG{c+cm}{	 * print the content of the symbol table in a readable format}
+\PYG{c+cm}{	 */}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{printContent}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}\PYG{n}{String}\PYG{o}{.}\PYG{n+na}{format}\PYG{o}{(}\PYG{n}{PrintFormat}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}line\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}address\PYGZdq{}}\PYG{o}{,}
+				\PYG{l+s}{\PYGZdq{}type\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}name\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}category\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}array size\PYGZdq{}}\PYG{o}{));}
+		\PYG{k}{for} \PYG{o}{(}\PYG{n}{Variable} \PYG{n}{v} \PYG{o}{:} \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Table}\PYG{o}{.}\PYG{n+na}{values}\PYG{o}{())}
+			\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}
+				\PYG{n}{String}\PYG{o}{.}\PYG{n+na}{format}\PYG{o}{(}\PYG{n}{PrintFormat}\PYG{o}{,}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getDeclarationLineNumber}\PYG{o}{(),}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getRelativeAddress}\PYG{o}{(),}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getType}\PYG{o}{(),}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getName}\PYG{o}{(),}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getCategory}\PYG{o}{(),}
+					\PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getArraySize}\PYG{o}{()));}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{private} \PYG{k+kt}{void} \PYG{n+nf}{declare}\PYG{o}{(}\PYG{n}{Node} \PYG{n}{identifier}\PYG{o}{,} \PYG{n}{Node} \PYG{n}{type}\PYG{o}{,} \PYG{n}{Node} \PYG{n}{arraySize}\PYG{o}{)}
+			\PYG{k+kd}{throws} \PYG{n}{Exception} \PYG{o}{\PYGZob{}}
+		\PYG{n}{String} \PYG{n}{name} \PYG{o}{=} \PYG{n}{identifier}\PYG{o}{.}\PYG{n+na}{getLexim}\PYG{o}{();}
+		\PYG{k}{if} \PYG{o}{(}\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{isDefined}\PYG{o}{(}\PYG{n}{name}\PYG{o}{))} \PYG{o}{\PYGZob{}}
+			\PYG{k}{throw} \PYG{k}{new} \PYG{n}{Exception}\PYG{o}{(}
+				\PYG{n}{String}\PYG{o}{.}\PYG{n+na}{format}\PYG{o}{(}
+					\PYG{l+s}{\PYGZdq{}redefinition of \PYGZpc{}s in line \PYGZpc{}d;\PYGZdq{}} \PYG{o}{+}
+					\PYG{l+s}{\PYGZdq{}already defined in line \PYGZpc{}d;\PYGZdq{}}\PYG{o}{,}
+					\PYG{n}{name}\PYG{o}{,} \PYG{n}{identifier}\PYG{o}{.}\PYG{n+na}{getDeclarationLineNumber}\PYG{o}{(),}
+					\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Table}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{k}{new} \PYG{n}{VariableName}\PYG{o}{(}\PYG{n}{name}\PYG{o}{))}
+					\PYG{o}{.}\PYG{n+na}{getDeclarationLineNumber}\PYG{o}{()));}
+		\PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{o}{\PYGZob{}}
+			\PYG{n}{Variable} \PYG{n}{v} \PYG{o}{=} \PYG{k}{new} \PYG{n}{Variable}\PYG{o}{(}\PYG{n}{DataSize}\PYG{o}{,} \PYG{n}{identifier}\PYG{o}{,} \PYG{n}{type}\PYG{o}{,} \PYG{n}{arraySize}\PYG{o}{);}
+			\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{Table}\PYG{o}{.}\PYG{n+na}{put}\PYG{o}{(}\PYG{k}{new} \PYG{n}{VariableName}\PYG{o}{(}\PYG{n}{name}\PYG{o}{),} \PYG{n}{v}\PYG{o}{);}
+			\PYG{n}{DataSize} \PYG{o}{+=} \PYG{n}{v}\PYG{o}{.}\PYG{n+na}{getSize}\PYG{o}{();}
+		\PYG{o}{\PYGZcb{}}
+	\PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

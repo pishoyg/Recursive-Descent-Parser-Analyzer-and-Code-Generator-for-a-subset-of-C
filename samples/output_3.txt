@@ -1,0 +1,109 @@
+line      address   type      name      category  array size
+6         6         integer   a         array     3         
+5         4         integer   z         simple    0         
+4         2         integer   y         simple    0         
+3         0         integer   x         simple    0         
+Assign    t0   1    
+Assign    t2   0    
+Assign    t1   6    
+Mul       t2   t2   2    
+Add       t1   t1   t2   
+Store     t1   t0   
+Assign    t0   1    
+Assign    t2   1    
+Assign    t1   6    
+Mul       t2   t2   2    
+Add       t1   t1   t2   
+Store     t1   t0   
+Assign    t0   1    
+Assign    t2   2    
+Assign    t1   6    
+Mul       t2   t2   2    
+Add       t1   t1   t2   
+Store     t1   t0   
+Assign    t3   3    
+Assign    t6   0    
+Assign    t5   6    
+Mul       t6   t6   2    
+Add       t5   t5   t6   
+Load      t5   t4   
+Mul       t2   t3   t4   
+Assign    t4   4    
+Assign    t7   1    
+Assign    t6   6    
+Mul       t7   t7   2    
+Add       t6   t6   t7   
+Load      t6   t5   
+Mul       t3   t4   t5   
+Add       t1   t2   t3   
+Assign    t3   5    
+Assign    t6   2    
+Assign    t5   6    
+Mul       t6   t6   2    
+Add       t5   t5   t6   
+Load      t5   t4   
+Mul       t2   t3   t4   
+Add       t0   t1   t2   
+Store     0    t0   
+Load      4    t1   
+Load      0    t2   
+SetE      t0   t1   t2   
+JumpZ     t0   L0   
+L1:
+Load      0    t1   
+Load      4    t2   
+SetE      t0   t1   t2   
+JumpZ     t0   L2   
+Load      2    t1   
+Assign    t2   2    
+Mul       t0   t1   t2   
+Store     4    t0   
+Load      4    t1   
+Assign    t2   1    
+Add       t0   t1   t2   
+Store     0    t0   
+Jump      L1   
+L2:
+Jump      L3   
+L0:
+L4:
+Load      0    t1   
+Load      4    t2   
+SetNE     t0   t1   t2   
+JumpZ     t0   L5   
+Assign    t3   0    
+Assign    t2   6    
+Mul       t3   t3   2    
+Add       t2   t2   t3   
+Load      t2   t1   
+Assign    t2   2    
+Mul       t0   t1   t2   
+Store     0    t0   
+Assign    t3   2    
+Assign    t6   1    
+Assign    t5   6    
+Mul       t6   t6   2    
+Add       t5   t5   t6   
+Load      t5   t4   
+Mul       t2   t3   t4   
+Assign    t4   3    
+Load      2    t5   
+Mul       t3   t4   t5   
+Add       t1   t2   t3   
+Assign    t3   5    
+Load      0    t6   
+Load      2    t7   
+Add       t5   t6   t7   
+Load      4    t6   
+Add       t4   t5   t6   
+Mul       t2   t3   t4   
+Add       t0   t1   t2   
+Assign    t2   0    
+Assign    t1   6    
+Mul       t2   t2   2    
+Add       t1   t1   t2   
+Store     t1   t0   
+Jump      L4   
+L5:
+L3:
+

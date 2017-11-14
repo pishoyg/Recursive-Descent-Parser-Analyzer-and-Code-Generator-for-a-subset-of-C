@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{int} \PYG{n}{x}\PYG{p}{;}
+	\PYG{k+kt}{float} \PYG{n}{y}\PYG{p}{;}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{x} \PYG{o}{=} \PYG{n}{y}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

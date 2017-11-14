@@ -1,0 +1,4 @@
+line      address   type      name      category  array size
+3         0         integer   y         array     5         
+Undefined variable: x
+

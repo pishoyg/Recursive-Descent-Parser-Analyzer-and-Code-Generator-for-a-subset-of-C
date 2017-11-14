@@ -1,0 +1,110 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{line}      \PYG{n}{address}   \PYG{n+nb}{type}      \PYG{n}{name}      \PYG{n}{category}  \PYG{n}{array} \PYG{n}{size}
+\PYG{l+m+mi}{6}         \PYG{l+m+mi}{6}         \PYG{n}{integer}   \PYG{n}{a}         \PYG{n}{array}     \PYG{l+m+mi}{3}         
+\PYG{l+m+mi}{5}         \PYG{l+m+mi}{4}         \PYG{n}{integer}   \PYG{n}{z}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{l+m+mi}{4}         \PYG{l+m+mi}{2}         \PYG{n}{integer}   \PYG{n}{y}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{l+m+mi}{3}         \PYG{l+m+mi}{0}         \PYG{n}{integer}   \PYG{n}{x}         \PYG{n}{simple}    \PYG{l+m+mi}{0}         
+\PYG{n}{Assign}    \PYG{n}{t0}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{0}    
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{n}{t1}   \PYG{n}{t0}   
+\PYG{n}{Assign}    \PYG{n}{t0}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{n}{t1}   \PYG{n}{t0}   
+\PYG{n}{Assign}    \PYG{n}{t0}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{n}{t1}   \PYG{n}{t0}   
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{3}    
+\PYG{n}{Assign}    \PYG{n}{t6}   \PYG{l+m+mi}{0}    
+\PYG{n}{Assign}    \PYG{n}{t5}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t6}   \PYG{n}{t6}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t5}   \PYG{n}{t5}   \PYG{n}{t6}   
+\PYG{n}{Load}      \PYG{n}{t5}   \PYG{n}{t4}   
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t3}   \PYG{n}{t4}   
+\PYG{n}{Assign}    \PYG{n}{t4}   \PYG{l+m+mi}{4}    
+\PYG{n}{Assign}    \PYG{n}{t7}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t6}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t7}   \PYG{n}{t7}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t6}   \PYG{n}{t6}   \PYG{n}{t7}   
+\PYG{n}{Load}      \PYG{n}{t6}   \PYG{n}{t5}   
+\PYG{n}{Mul}       \PYG{n}{t3}   \PYG{n}{t4}   \PYG{n}{t5}   
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t2}   \PYG{n}{t3}   
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{5}    
+\PYG{n}{Assign}    \PYG{n}{t6}   \PYG{l+m+mi}{2}    
+\PYG{n}{Assign}    \PYG{n}{t5}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t6}   \PYG{n}{t6}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t5}   \PYG{n}{t5}   \PYG{n}{t6}   
+\PYG{n}{Load}      \PYG{n}{t5}   \PYG{n}{t4}   
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t3}   \PYG{n}{t4}   
+\PYG{n}{Add}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}   
+\PYG{n}{Load}      \PYG{l+m+mi}{4}    \PYG{n}{t1}   
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t2}   
+\PYG{n}{SetE}      \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{JumpZ}     \PYG{n}{t0}   \PYG{n}{L0}   
+\PYG{n}{L1}\PYG{p}{:}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t1}   
+\PYG{n}{Load}      \PYG{l+m+mi}{4}    \PYG{n}{t2}   
+\PYG{n}{SetE}      \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{JumpZ}     \PYG{n}{t0}   \PYG{n}{L2}   
+\PYG{n}{Load}      \PYG{l+m+mi}{2}    \PYG{n}{t1}   
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Mul}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{l+m+mi}{4}    \PYG{n}{t0}   
+\PYG{n}{Load}      \PYG{l+m+mi}{4}    \PYG{n}{t1}   
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{1}    
+\PYG{n}{Add}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}   
+\PYG{n}{Jump}      \PYG{n}{L1}   
+\PYG{n}{L2}\PYG{p}{:}
+\PYG{n}{Jump}      \PYG{n}{L3}   
+\PYG{n}{L0}\PYG{p}{:}
+\PYG{n}{L4}\PYG{p}{:}
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t1}   
+\PYG{n}{Load}      \PYG{l+m+mi}{4}    \PYG{n}{t2}   
+\PYG{n}{SetNE}     \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{JumpZ}     \PYG{n}{t0}   \PYG{n}{L5}   
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{0}    
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t3}   \PYG{n}{t3}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{n}{t3}   
+\PYG{n}{Load}      \PYG{n}{t2}   \PYG{n}{t1}   
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Mul}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{l+m+mi}{0}    \PYG{n}{t0}   
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{2}    
+\PYG{n}{Assign}    \PYG{n}{t6}   \PYG{l+m+mi}{1}    
+\PYG{n}{Assign}    \PYG{n}{t5}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t6}   \PYG{n}{t6}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t5}   \PYG{n}{t5}   \PYG{n}{t6}   
+\PYG{n}{Load}      \PYG{n}{t5}   \PYG{n}{t4}   
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t3}   \PYG{n}{t4}   
+\PYG{n}{Assign}    \PYG{n}{t4}   \PYG{l+m+mi}{3}    
+\PYG{n}{Load}      \PYG{l+m+mi}{2}    \PYG{n}{t5}   
+\PYG{n}{Mul}       \PYG{n}{t3}   \PYG{n}{t4}   \PYG{n}{t5}   
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t2}   \PYG{n}{t3}   
+\PYG{n}{Assign}    \PYG{n}{t3}   \PYG{l+m+mi}{5}    
+\PYG{n}{Load}      \PYG{l+m+mi}{0}    \PYG{n}{t6}   
+\PYG{n}{Load}      \PYG{l+m+mi}{2}    \PYG{n}{t7}   
+\PYG{n}{Add}       \PYG{n}{t5}   \PYG{n}{t6}   \PYG{n}{t7}   
+\PYG{n}{Load}      \PYG{l+m+mi}{4}    \PYG{n}{t6}   
+\PYG{n}{Add}       \PYG{n}{t4}   \PYG{n}{t5}   \PYG{n}{t6}   
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t3}   \PYG{n}{t4}   
+\PYG{n}{Add}       \PYG{n}{t0}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Assign}    \PYG{n}{t2}   \PYG{l+m+mi}{0}    
+\PYG{n}{Assign}    \PYG{n}{t1}   \PYG{l+m+mi}{6}    
+\PYG{n}{Mul}       \PYG{n}{t2}   \PYG{n}{t2}   \PYG{l+m+mi}{2}    
+\PYG{n}{Add}       \PYG{n}{t1}   \PYG{n}{t1}   \PYG{n}{t2}   
+\PYG{n}{Store}     \PYG{n}{t1}   \PYG{n}{t0}   
+\PYG{n}{Jump}      \PYG{n}{L4}   
+\PYG{n}{L5}\PYG{p}{:}
+\PYG{n}{L3}\PYG{p}{:}
+\end{Verbatim}
